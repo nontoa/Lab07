@@ -74,18 +74,18 @@ public class MyBatisExample {
         SqlSession sqlss = sessionfact.openSession();
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);     
         ServiciosAlquilerImpl servicios = new ServiciosAlquilerImpl();
-        /*try {
-			servicios.consultarCliente(100);
+        try {
+			servicios.consultarCliente(666);
 		} 
         catch (ExcepcionServiciosAlquiler e) {
 			e.printStackTrace();
-		}*/
+		}
         
-        System.out.println(cm.consultarClientes());
+        //System.out.println(cm.consultarClientes());
         
         //2 Verifique el funcionamiento haciendo una consulta a través del 
         //'mapper' desde MyBatisExample..
-        /*System.out.println(cm.consultarCliente(100));
+        /*System.out.println(cm.consultarCliente(666));
         
         //3.Configure en el XML correspondiente, la operación agregarItemRentadoACliente. 
         //Verifique el funcionamiento haciendo una consulta a través del 'mapper' 

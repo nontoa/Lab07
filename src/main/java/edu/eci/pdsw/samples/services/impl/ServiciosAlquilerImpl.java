@@ -6,6 +6,7 @@ import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemRentadoDAO;
 import edu.eci.pdsw.sampleprj.dao.TipoItemDAO;
+import edu.eci.pdsw.sampleprj.dao.mybatis.MyBATISClienteDAO;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import edu.eci.pdsw.samples.entities.Cliente;
@@ -35,7 +36,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    
    @Inject 
    private ItemRentadoDAO itemRentadoDAO;
-
+   public ServiciosAlquilerImpl() {}
    
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
@@ -51,11 +52,11 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
 	   try {
-		   return clienteDAO.load((docu));
+		   MyBATISClienteDAO dao = new MyBATISClienteDAO();
+		   return dao.load(docu);
 	   }
 	   catch(PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al consultar el cliente "+docu,ex);
-
 	   }
    }
 
