@@ -18,7 +18,7 @@
         <result property='tarifaxDia' column='tarifaxdia'/>
         <result property='formatoRenta' column='formatorenta'/>
         <result property='genero' column='genero'/>
-        <association  property="tipo" javaType="TipoItem" resultMap = 'edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper.TIPOITEMRESULT' columnPrefix='idtipoitem' ></association>      
+        <association  property="tipo" javaType="TipoItem" resultMap = 'edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper.TIPOITEMRESULT' columnPrefix='idtipoitem' ></association>      
         </resultMap>
     
     <select id="consultarItems" parameterType="Item" resultMap="Itemresult">

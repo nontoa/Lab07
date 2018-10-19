@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper">
+     <resultMap id = "ItemRentadoresult" type = "ItemRentado">
+	   <result property = "id" column = "id_rentado"/>
+	   <result property = "fechainiciorenta" column = "fechainiciorenta"/>
+	   <result property = "fechafinrenta" column = "fechafinrenta"/>
+	   <association property="item" javaType="Item" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.Itemresult"></association>   
+	</resultMap>
+
+    <select id="consultarItemRentado" parameterType="ItemRentado" resultMap="ItemRentadoresult">
+    	SELECT *
+			FROM VI_ITEMRENTADO where VI_ITEMRENTADO.id=#{id}
+    </select>
+
+    <select id="consultarItemsRentados" parameterType="ItemRentado" resultMap="ItemRentadoresult">
+    	SELECT *
+			FROM VI_ITEMRENTADO 
+    </select>
+
+    <insert id="insertarItemRentado" >
+	  insert into VI_ITEMRENTADO (id,CLIENTES_DOCUMENTO,ITEMS_id,fechainiciorenta,fechafinrenta)
+	  values (#{id},#{idcliente},#{item.id},#{inicio},#{fin})
+	</insert>    
+
+                
+</mapper>

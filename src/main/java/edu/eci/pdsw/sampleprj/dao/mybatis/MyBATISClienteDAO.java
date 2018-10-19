@@ -25,12 +25,11 @@ public class MyBATISClienteDAO implements ClienteDAO {
 		  }
 		  catch(org.apache.ibatis.exceptions.PersistenceException e){ 
 		      throw new PersistenceException("Error al registrar el cliente "+it.toString(),e);
-		  }        
-		
+		  }       	
 	}
 
 	@Override
-	public Cliente load(int id) throws PersistenceException {
+	public Cliente load(long id) throws PersistenceException {
 		try{
 		      return ClienteMapper.consultarCliente(id);
 		  }

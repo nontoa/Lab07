@@ -70,19 +70,9 @@
 	   <result property = "direccion" column = "direccion"/>
 	   <result property = "email" column = "email"/>
 	   <result property = "vetado" column = "vetado"/>
-	    <collection  property="rentados" ofType="ItemRentado"  resultMap='ItemRentadoresult' columnPrefix='iditemrentado'></collection> 
+	    <collection  property="rentados" ofType="ItemRentado" resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoresult'></collection> 
 	</resultMap>
 
-    <resultMap id = "ItemRentadoresult" type = "ItemRentado">
-	   <result property = "id" column = "id_rentado"/>
-	   <result property = "fechainiciorenta" column = "fechainiciorenta"/>
-	   <result property = "fechafinrenta" column = "fechafinrenta"/>
-	   <association property="item" javaType="Item" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.Itemresult"></association>   
-	</resultMap>
-
-   
-    <resultMap type='TIPOITEM' id='TIPOITEMRESULT'>
-        <id property='id' column='id'/>
-        <result property='descripcion' column='descripcion'/>
-    </resultMap>
 </mapper>
+
+

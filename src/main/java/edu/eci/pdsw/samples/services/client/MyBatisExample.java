@@ -34,6 +34,8 @@ import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.pdsw.samples.services.impl.ServiciosAlquilerImpl;
 
 /**
  *
@@ -70,12 +72,20 @@ public class MyBatisExample {
     public static void main(String args[]) throws SQLException, ParseException {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
         SqlSession sqlss = sessionfact.openSession();
-        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);        
-        //System.out.println(cm.consultarClientes());
+        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);     
+        ServiciosAlquilerImpl servicios = new ServiciosAlquilerImpl();
+        /*try {
+			servicios.consultarCliente(100);
+		} 
+        catch (ExcepcionServiciosAlquiler e) {
+			e.printStackTrace();
+		}*/
+        
+        System.out.println(cm.consultarClientes());
         
         //2 Verifique el funcionamiento haciendo una consulta a través del 
         //'mapper' desde MyBatisExample..
-        System.out.println(cm.consultarCliente(100));
+        /*System.out.println(cm.consultarCliente(100));
         
         //3.Configure en el XML correspondiente, la operación agregarItemRentadoACliente. 
         //Verifique el funcionamiento haciendo una consulta a través del 'mapper' 
@@ -102,7 +112,7 @@ public class MyBatisExample {
         
         System.out.println(im.consultarItems());
         System.out.println(im.consultarItem(1));
-        
+        */
         sqlss.commit();
         
         

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
 import edu.eci.pdsw.sampleprj.dao.ItemDAO;
+import edu.eci.pdsw.sampleprj.dao.ItemRentadoDAO;
 import edu.eci.pdsw.sampleprj.dao.TipoItemDAO;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -14,6 +15,8 @@ import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Singleton
@@ -29,6 +32,9 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    
    @Inject
    private TipoItemDAO tipoItemDAO;
+   
+   @Inject 
+   private ItemRentadoDAO itemRentadoDAO;
 
    
    @Override
@@ -45,7 +51,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
 	   try {
-		   return clienteDAO.load((int)(docu));
+		   return clienteDAO.load((docu));
 	   }
 	   catch(PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al consultar el cliente "+docu,ex);
@@ -92,8 +98,15 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-	   //FALTA IMPLEMENTAR
-       throw new UnsupportedOperationException("Not supported yet.");
+	   try {
+		   ItemRentado rentado = itemRentadoDAO.load(iditem);
+		   int tarifa = valorMultaRetrasoxDia(rentado.getItem().getId());
+		   int dias =(int)((fechaDevolucion.getTime()-rentado.getFechainiciorenta().getTime())/86400000);
+		   return (long) tarifa * dias;
+	   }
+	   catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al consultar el itemrentado "+iditem,ex);
+	   }
    }
 
    @Override
@@ -118,8 +131,22 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-	   //FALTA IMPLEMENTAR
-       throw new UnsupportedOperationException("Not supported yet.");
+	   try {
+		   Calendar cal = Calendar.getInstance();
+		   cal.setTime(date);
+		   cal.add(Calendar.DAY_OF_YEAR, numdias);
+		   Date fin = (Date) cal.getTime();
+		   Integer random = (int )(Math.random() * 1000000 + 1);
+		   while (itemRentadoDAO.consultarItemsRentados().contains(random)) {
+			   random = (int )(Math.random() * 1000000 + 1);
+		   }
+		   itemRentadoDAO.save(random, item, date, fin,docu);
+	   }
+	   catch (PersistenceException ex) {
+		   throw new ExcepcionServiciosAlquiler("Error al insertar itemrentado"+ex);
+	   }
+	   
+	  
    }
 
    @Override
@@ -156,11 +183,16 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
    @Override
    public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   }
+	   try {
+		   itemDAO.save(i);
+	   }
+	   catch(PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al insertar item"+ex);
+	   }   }
 
    @Override
    public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	   Cliente cliente = consultarCliente(docu);
+	   cliente.setVetado(estado);
    }
 }
