@@ -20,7 +20,7 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
 	@Override
 	public void save(int id, Item item, Date inicio, Date fin,long idcliente) throws PersistenceException {
 		 try{
-		      itemRentadoMapper.insertarItemRentado(id,item,inicio,fin,idcliente);
+		      itemRentadoMapper.insertarItemRentado(id,item.getId(),inicio,fin,idcliente);
 		  }
 		  catch(org.apache.ibatis.exceptions.PersistenceException e){ 
 		      throw new PersistenceException("Error al registrar el itemrentado "+id,e);

@@ -23,7 +23,7 @@
 
     <insert id="insertarItemRentado" >
 	  insert into VI_ITEMRENTADO (id,CLIENTES_DOCUMENTO,ITEMS_id,fechainiciorenta,fechafinrenta)
-	  values (#{id},#{idcliente},#{item.id},#{inicio},#{fin})
+	  values (#{id},#{idcliente},#{itemid},#{inicio},#{fin})
 	</insert>    
 
                 

@@ -129,7 +129,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 		   Calendar cal = Calendar.getInstance();
 		   cal.setTime(date);
 		   cal.add(Calendar.DAY_OF_YEAR, numdias);
-		   java.sql.Date fin = (Date) cal.getTime();
+		   java.util.Date utildate = (java.util.Date) cal.getTime();
+		   java.sql.Date fin = new java.sql.Date(utildate.getTime());
 		   Integer random = (int )(Math.random() * 1000000 + 1);
 		   while (itemRentadoDAO.consultarItemsRentados().contains(random)) {
 			   random = (int )(Math.random() * 1000000 + 1);

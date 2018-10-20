@@ -15,6 +15,6 @@ public interface ItemRentadoMapper {
     
     public ItemRentado consultarItemRentado(@Param("id")int id);
     
-    public void insertarItemRentado(@Param("id")int id,@Param("item")Item item,
+    public void insertarItemRentado(@Param("id")int id,@Param("itemid")int itemid,
     		@Param("inicio")Date inicio,@Param("fin")Date fin,@Param("idcliente")long idc);
 }

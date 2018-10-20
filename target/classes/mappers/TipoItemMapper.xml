@@ -6,23 +6,23 @@
 <mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper">
 
     
-    <resultMap type='TIPOITEM' id='TIPOITEMRESULT'>
+    <resultMap type='TipoItem' id='TIPOITEMRESULT'>
         <id property='id' column='id'/>
         <result property='descripcion' column='descripcion'/>
     </resultMap>
         
-    <select id="getTiposItem" parameterType="TipoItem" resultMap="TIPOITEMRESULT">
+    <select id="getTipoItem" parameterType="TipoItem" resultMap="TIPOITEMRESULT">
     	SELECT *
-			FROM VI_ITEMS where VI_TIPOITEM.id= #{id}
+			FROM VI_TIPOITEM where VI_TIPOITEM.id= #{id}
     </select>     
     
     <select id="getTiposItems" parameterType="TipoItem" resultMap="TIPOITEMRESULT">
     	SELECT *
-			FROM VI_ITEMS 
+			FROM VI_TIPOITEM 
     </select> 
 
     <insert id="addTipoItem" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO VI_ITEMS (descripción)
+        INSERT INTO VI_TIPOITEM (descripción)
         values (#{descripcion})
     </insert>
            
