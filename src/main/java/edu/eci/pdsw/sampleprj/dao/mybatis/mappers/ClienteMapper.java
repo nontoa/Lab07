@@ -36,4 +36,6 @@ public interface ClienteMapper {
      */
     public List<Cliente> consultarClientes();
     
+    public void vetar(@Param("docu") long  docu, @Param("estado")int estado);
+    
 }

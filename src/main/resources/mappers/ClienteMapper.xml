@@ -63,6 +63,16 @@
 	  values (#{id},#{idit},#{fInicio},#{fFin})
 </insert>
 
+<update id="vetar">
+      update VI_CLIENTES set vetado = #{estado} 
+      where documento = #{docu}       
+</update>
+
+<insert id="insertarCliente">
+    insert into VI_CLIENTES (documento,nombre,telefono,direccion,email,vetado)
+    values (#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado})
+</insert>
+
 <resultMap id = "ClienteResult" type = "Cliente">
 	   <id property = "documento" column = "documento"/>
 	   <result property = "nombre" column = "cliente_nombre"/>

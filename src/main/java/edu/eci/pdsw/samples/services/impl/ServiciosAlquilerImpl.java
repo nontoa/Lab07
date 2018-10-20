@@ -1,5 +1,4 @@
 package edu.eci.pdsw.samples.services.impl;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import edu.eci.pdsw.sampleprj.dao.ClienteDAO;
@@ -22,8 +21,6 @@ import java.util.List;
 
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
-
-	
 	
    @Inject
    private ItemDAO itemDAO;
@@ -36,7 +33,6 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    
    @Inject 
    private ItemRentadoDAO itemRentadoDAO;
-   public ServiciosAlquilerImpl() {}
    
    @Override
    public int valorMultaRetrasoxDia(int itemId) {
@@ -52,8 +48,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
 	   try {
-		   MyBATISClienteDAO dao = new MyBATISClienteDAO();
-		   return dao.load(docu);
+		   return clienteDAO.load(docu);
 	   }
 	   catch(PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al consultar el cliente "+docu,ex);
@@ -63,12 +58,10 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
 	   try {
-		   Cliente cli = clienteDAO.load((int) idcliente);
-		   return cli.getRentados();
+		   return clienteDAO.load(idcliente).getRentados();
 	   }
 	   catch(PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al consultar los items rentados del cliente "+idcliente,ex);
-
 	   }
    }
 
@@ -136,7 +129,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 		   Calendar cal = Calendar.getInstance();
 		   cal.setTime(date);
 		   cal.add(Calendar.DAY_OF_YEAR, numdias);
-		   Date fin = (Date) cal.getTime();
+		   java.sql.Date fin = (Date) cal.getTime();
 		   Integer random = (int )(Math.random() * 1000000 + 1);
 		   while (itemRentadoDAO.consultarItemsRentados().contains(random)) {
 			   random = (int )(Math.random() * 1000000 + 1);
@@ -174,8 +167,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
 	   try{
-		   Item it=consultarItem(id);
-		   it.setTarifaxDia(tarifa);
+		   itemDAO.actualizarTarifa(id,tarifa);
 	   }
 	   catch(PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item"+id+ex);
@@ -193,7 +185,6 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-	   Cliente cliente = consultarCliente(docu);
-	   cliente.setVetado(estado);
+	   clienteDAO.vetar(docu,estado); 
    }
 }

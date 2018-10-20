@@ -31,5 +31,9 @@
 			FROM VI_ITEMS join VI_TIPOITEM where VI_ITEMS.TIPOITEM_id=VI_TIPOITEM.id
 			and VI_ITEMS.id=#{id}
     </select>
-    
+
+    <update id="actualizarTarifa">
+          update VI_ITEMS set tarifaxdia = #{tarifa} 
+          where id = #{id}  
+    </update>
 </mapper>

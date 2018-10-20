@@ -10,5 +10,20 @@
         <id property='id' column='id'/>
         <result property='descripcion' column='descripcion'/>
     </resultMap>
-                
+        
+    <select id="getTiposItem" parameterType="TipoItem" resultMap="TIPOITEMRESULT">
+    	SELECT *
+			FROM VI_ITEMS where VI_TIPOITEM.id= #{id}
+    </select>     
+    
+    <select id="getTiposItems" parameterType="TipoItem" resultMap="TIPOITEMRESULT">
+    	SELECT *
+			FROM VI_ITEMS 
+    </select> 
+
+    <insert id="addTipoItem" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO VI_ITEMS (descripción)
+        values (#{descripcion})
+    </insert>
+           
 </mapper>

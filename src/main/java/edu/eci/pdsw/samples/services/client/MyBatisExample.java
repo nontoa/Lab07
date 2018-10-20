@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.apache.ibatis.io.Resources;
@@ -35,6 +36,8 @@ import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
+import edu.eci.pdsw.samples.services.ServiciosAlquiler;
+import edu.eci.pdsw.samples.services.ServiciosAlquilerFactory;
 import edu.eci.pdsw.samples.services.impl.ServiciosAlquilerImpl;
 
 /**
@@ -73,14 +76,6 @@ public class MyBatisExample {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
         SqlSession sqlss = sessionfact.openSession();
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);     
-        ServiciosAlquilerImpl servicios = new ServiciosAlquilerImpl();
-        try {
-			servicios.consultarCliente(666);
-		} 
-        catch (ExcepcionServiciosAlquiler e) {
-			e.printStackTrace();
-		}
-        
         //System.out.println(cm.consultarClientes());
         
         //2 Verifique el funcionamiento haciendo una consulta a través del 
@@ -113,14 +108,32 @@ public class MyBatisExample {
         System.out.println(im.consultarItems());
         System.out.println(im.consultarItem(1));
         */
+        
+        //8
+        //9
+        
+        ServiciosAlquiler service =   ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
+        try {
+			//System.out.println(service.consultarCliente(666).toString());
+			//System.out.println(service.consultarClientes().toString());
+			//System.out.println(service.consultarItem(1).toString());
+            //LocalDate date = LocalDate.now();
+        	//System.out.println(service.consultarMultaAlquiler(5, java.sql.Date.valueOf(date)));
+        	service.vetarCliente(12, false);
+        	service.registrarAlquilerCliente(java.sql.Date.valueOf(LocalDate.now()), (long) 12, service.consultarItem(1), 20);
+		} 
+        catch (ExcepcionServiciosAlquiler e) {
+			e.printStackTrace();
+		}
+        
+        
+        
+        
+        
         sqlss.commit();
         
         
         sqlss.close();
-
-        
-        
+   
     }
-
-
 }
