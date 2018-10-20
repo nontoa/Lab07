@@ -33,6 +33,7 @@ import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper;
+import edu.eci.pdsw.samples.entities.Cliente;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
@@ -113,6 +114,11 @@ public class MyBatisExample {
         //8
         //9
         ServiciosAlquiler service = ServiciosAlquilerFactory.getInstance().getServiciosAlquiler();
+        try {
+			service.registrarCliente(new Cliente("pedro",(long)3,"654","espinoza","espinoza@mail"));
+		} catch (ExcepcionServiciosAlquiler e) {
+			e.printStackTrace();
+		}
        /*
         try {
 			//System.out.println(service.consultarCliente(666).toString());

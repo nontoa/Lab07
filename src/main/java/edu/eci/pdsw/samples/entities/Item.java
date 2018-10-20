@@ -34,6 +34,14 @@ public class Item implements Serializable{
         this.genero = genero;
     }
 
+    public Item(TipoItem tipo, int id, String nombre,String descripcion,long tarifaxdia) {
+    	this.tipo = tipo;
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tarifaxDia = tarifaxdia;
+    }
+    
     public Item() {
     }
     

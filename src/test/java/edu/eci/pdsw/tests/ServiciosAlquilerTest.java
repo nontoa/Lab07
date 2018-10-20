@@ -22,7 +22,6 @@ public class ServiciosAlquilerTest {
 
     @Inject
     private SqlSession sqlSession; 
-
     ServiciosAlquiler serviciosAlquiler;
 
     public ServiciosAlquilerTest() {
@@ -32,19 +31,58 @@ public class ServiciosAlquilerTest {
     @Before
     public void setUp() {
     }
-
+/*
     @Test
     public void emptyDB() {
         qt().forAll(longs().from(1).upTo(1000)).check((documento) -> {
-            boolean r = false;
+            boolean r = true;
             try {
                 Cliente cliente = serviciosAlquiler.consultarCliente(documento);
             } catch(ExcepcionServiciosAlquiler e) {
-                r = true;
+                r = false;
             } catch(IndexOutOfBoundsException e) {
-                r = true;
+                r = false;
             }
             return r;
         });
+    }*/
+    
+    @Test
+    public void insertarconsultarcliente() {
+    	 qt().forAll(ClientGenerator.Clientes())
+    	 .check(cliente -> {
+    		 try {
+    			 serviciosAlquiler.registrarCliente(cliente);
+    			 return serviciosAlquiler.consultarClientes().contains(cliente);
+    			 }
+    		 catch(ExcepcionServiciosAlquiler e) {
+    			 return true;
+    		 }
+    		 catch(Exception ex) {
+    			 ex.printStackTrace();
+                 return false; 
+    		 }	  
+    	 });
     }
+    
+    @Test
+    public void insertarconsultaritem() {
+    	 qt().forAll(ItemGenerator.Items())
+    	 .check(item -> {
+    		 try {
+    			 serviciosAlquiler.registrarItem(item);
+    			 return serviciosAlquiler.consultarItemsDisponibles().contains(item);
+    			 }
+    		 catch(ExcepcionServiciosAlquiler e) {
+    			 return true;
+    		 }
+    		 catch(Exception ex) {
+    			 ex.printStackTrace();
+                 return false; 
+    		 }	  
+    	 });
+    }
+    
+    
+    
 }

@@ -16,13 +16,11 @@ import edu.eci.pdsw.tests.*;
 public class ItemGenerator {
 
 	public static Gen<Item> Items() {
-		return TypeItemGenerator.TiposItems().zip(Genid().zip,Gennombre(),Gendescripcion(),Genfecha(),Gentarifa(),GenformatoRenta(),Gengenero(),
-		(tipo,id,nombre,descripcion,fechaLanzamiendo,tarifaxDia,formatoRenta,genero)
-		-> new Item(tipo,id,nombre,descripcion,fechaLanzamiendo,tarifaxDia,formatoRenta,genero)); 
+		return TypeItemGenerator.TiposItems().zip(Genid(),Gennombre()
+	,Gendescripcion(),Gentarifa(),(tipo,id,nombre,descripcion,tarifaxDia)-> new Item(tipo,id,nombre,descripcion,tarifaxDia));
+				  
 	}
       
-        
-
 	private static Gen<Integer> Genid() {
 		return integers().between(0, 10000);
 	}
