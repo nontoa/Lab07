@@ -45,9 +45,9 @@ public class ServiciosAlquilerTest {
             }
             return r;
         });
-    }*/
-    
-    @Test
+    }
+  */  
+/*    @Test
     public void insertarconsultarcliente() {
     	 qt().forAll(ClientGenerator.Clientes())
     	 .check(cliente -> {
@@ -84,5 +84,6 @@ public class ServiciosAlquilerTest {
     }
     
     
+  */
     
 }
