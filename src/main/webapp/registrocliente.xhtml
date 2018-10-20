@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+<h:form id="cliente_form">
+	<h1>Registro cliente</h1>
+	<br><p:inputText id="nombre" value="#{clienteBean.nombre}"> Nombre</p:inputText></br>
+	<br><p:inputText id="documento" value="#{clienteBean.documento}"> Documento</p:inputText></br>
+	<br><p:inputText id="telefono" value="#{clienteBean.telefono}"> Telefono</p:inputText></br>
+	<br><p:inputText id="direccion" value="#{clienteBean.direccion}"> Direccion</p:inputText></br>
+	<br><p:inputText id="email" value="#{clienteBean.email}"> Email</p:inputText></br>
+	<p:commandButton value="Agregar" actionListener="#{clienteBean.agregarCliente(commentBean.nombre,commentBean.documento,commentBean.telefono,commentBean.direccion,commentBean.email)}" update='cliente_form' />
+	
+	<p:dataTable id="cliente_table" var="cliente" value="#{clienteBean.clientes}">
+		<p:column headerText="Documento">
+			<h:outputText value="#{cliente.documento}" />
+		</p:column>
+		<p:column headerText="Nombre">
+			<h:outputText value="#{cliente.nombre}" />
+		</p:column>
+		<p:column headerText="Telefono">
+			<h:outputText value="#{cliente.telefono}" />
+		</p:column>
+		<p:column headerText="Direccion">
+			<h:outputText value="#{cliente.direccion}" />
+		</p:column>
+		<p:column headerText="Email">
+			<h:outputText value="#{cliente.email}" />
+		</p:column>
+		
+		<!-- Falta escoger cliente 
+	
+		<p:column headerText="Cliente">
+			<p:button outcome="blog?user=#{cliente.direccion}" value="View Blog" />
+		</p:column>
+		-->
+		
+	</p:dataTable>
+</h:form>
+</h:body>
+</html>
