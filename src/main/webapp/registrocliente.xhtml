@@ -11,14 +11,14 @@
 <h:body>
 <h:form id="cliente_form">
 	<h1>Registro cliente</h1>
-	<br><p:inputText id="nombre" value="#{clienteBean.nombre}"> Nombre</p:inputText></br>
-	<br><p:inputText id="documento" value="#{clienteBean.documento}"> Documento</p:inputText></br>
-	<br><p:inputText id="telefono" value="#{clienteBean.telefono}"> Telefono</p:inputText></br>
-	<br><p:inputText id="direccion" value="#{clienteBean.direccion}"> Direccion</p:inputText></br>
-	<br><p:inputText id="email" value="#{clienteBean.email}"> Email</p:inputText></br>
-	<p:commandButton value="Agregar" actionListener="#{clienteBean.agregarCliente(commentBean.nombre,commentBean.documento,commentBean.telefono,commentBean.direccion,commentBean.email)}" update='cliente_form' />
+	<br><p:inputText id="nombre" value="#{alquilerItemsBean.nombre}"> Nombre</p:inputText></br>
+	<br><p:inputText id="documento" value="#{alquilerItemsBean.documento}"> Documento</p:inputText></br>
+	<br><p:inputText id="telefono" value="#{alquilerItemsBean.telefono}"> Telefono</p:inputText></br>
+	<br><p:inputText id="direccion" value="#{alquilerItemsBean.direccion}"> Direccion</p:inputText></br>
+	<br><p:inputText id="email" value="#{alquilerItemsBean.email}"> Email</p:inputText></br>
+	<p:commandButton value="Agregar" actionListener="#{alquilerItemsBean.agregarCliente(alquilerItemsBean.nombre,alquilerItemsBean.documento,alquilerItemsBean.telefono,alquilerItemsBean.direccion,alquilerItemsBean.email)}" update='cliente_form' />
 	
-	<p:dataTable id="cliente_table" var="cliente" value="#{clienteBean.clientes}">
+	<p:dataTable id="cliente_table" var="cliente" value="#{alquilerItemsBean.clientes}">
 		<p:column headerText="Documento">
 			<h:outputText value="#{cliente.documento}" />
 		</p:column>
@@ -35,13 +35,10 @@
 			<h:outputText value="#{cliente.email}" />
 		</p:column>
 		
-		<!-- Falta escoger cliente 
-	
 		<p:column headerText="Cliente">
-			<p:button outcome="blog?user=#{cliente.direccion}" value="View Blog" />
-		</p:column>
-		-->
-		
+			<p:button outcome="registroalquiler?user=#{cliente.documento}" value="View Cliente" />
+		</p:column>		
+        
 	</p:dataTable>
 </h:form>
 </h:body>

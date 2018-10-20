@@ -2,6 +2,7 @@ package edu.eci.pdsw.view;
 
 import java.util.List;
 
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -11,12 +12,14 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 
 @SuppressWarnings("deprecation")
-@ManagedBean(name = "clienteBean")
+@ManagedBean(name = "alquilerItemsBean")
 @SessionScoped
 
 
-public class ClienteBean extends BasePageBean {
+public class AlquilerItemsBean extends BasePageBean {
 
+	
+	@ManagedProperty(value = "#{param.user}")
 	@Inject
 	private ServiciosAlquiler serviciosalquiler;
 	
