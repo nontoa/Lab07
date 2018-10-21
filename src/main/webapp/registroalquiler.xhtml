@@ -10,8 +10,29 @@
 </h:head>
 <h:body>
 <h:form id="registroalquiler_form">
-	<h1>Registro cliente</h1>
-
+    <h1>registro de #{alquilerItemsBean.document}</h1>
+    <br><p:inputText id="iditem" value="#{alquilerItemsBean.iditem}" update='registroalquiler_form'> id del item</p:inputText></br>
+	<br><p:inputText id="numdias" value="#{alquilerItemsBean.numdias}" update='registroalquiler_form'> numero de dias de alquiler</p:inputText></br>
+    <br><p:outputLabel id='costoalquiler' value="#{alquilerItemsBean.costo}"> Costo del alquiler</p:outputLabel></br>
+    <p:commandButton value="valor del alquiler" actionListener="#{alquilerItemsBean.costoAlquiler(alquilerItemsBean.iditem, alquilerItemsBean.numdias)}" update='registroalquiler_form'/>
+	<h:button outcome="registrocliente" value="Alquilar item" actionListener="#{alquilerItemsBean.rentarItem(alquilerItemsBean.iditem,alquilerItemsBean.numdias)}"/>
+</h:form>
+<h:form>
+	<p:dataTable id="itemrentados_table" var="itemrentado" value="#{alquilerItemsBean.alquilados}">
+		<p:column headerText="Id">
+			<h:outputText value="#{itemrentado.id}" />
+		</p:column>
+        <p:column headerText="fecha minima entrega">
+			<h:outputText value="#{itemrentado.fechafinrenta}" />
+		</p:column>
+         <p:column headerText="fecha devolucion">
+			<h:outputText value="#{alquilerItemsBean.fechaActual()}" />
+		</p:column>
+		<p:column headerText="multa">
+  			<h:outputText value="#{alquilerItemsBean.multa(itemrentado.id)}" />
+		</p:column>
+		
+</p:dataTable>
 </h:form>
 </h:body>
 </html>
