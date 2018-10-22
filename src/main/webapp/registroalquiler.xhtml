@@ -3,19 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+
+
 
 <h:head>
 	<title></title>
 </h:head>
 <h:body>
-<h:form id="registroalquiler_form">
     <h1>registro de #{alquilerItemsBean.document}</h1>
-    <br><p:inputText id="iditem" value="#{alquilerItemsBean.iditem}" update='registroalquiler_form'> id del item</p:inputText></br>
-	<br><p:inputText id="numdias" value="#{alquilerItemsBean.numdias}" update='registroalquiler_form'> numero de dias de alquiler</p:inputText></br>
+    <h:form id="registroalquiler_form">
+    <br><p:inputText id="iditem" value="#{alquilerItemsBean.iditem}" > id del item</p:inputText></br>
+	<br><p:inputText id="numdias" value="#{alquilerItemsBean.numdias}"> numero de dias de alquiler</p:inputText></br>
     <br><p:outputLabel id='costoalquiler' value="#{alquilerItemsBean.costo}"> Costo del alquiler</p:outputLabel></br>
-    <p:commandButton value="valor del alquiler" actionListener="#{alquilerItemsBean.costoAlquiler(alquilerItemsBean.iditem, alquilerItemsBean.numdias)}" update='registroalquiler_form'/>
-	<h:button outcome="registrocliente" value="Alquilar item" actionListener="#{alquilerItemsBean.rentarItem(alquilerItemsBean.iditem,alquilerItemsBean.numdias)}"/>
+    <p:commandButton value="valor del alquiler" actionListener="#{alquilerItemsBean.costoAlquiler(alquilerItemsBean.iditem, alquilerItemsBean.numdias)}" update='costoalquiler'/>
+    <p:button outcome = "registrocliente" value="alquilar item" actionlistener="#{alquilerItemsBean.rentarItem(alquilerItemsBean.iditem, alquilerItemsBean.numdias,alquilerItemsBean.document)}"/>
+     
 </h:form>
 <h:form>
 	<p:dataTable id="itemrentados_table" var="itemrentado" value="#{alquilerItemsBean.alquilados}">

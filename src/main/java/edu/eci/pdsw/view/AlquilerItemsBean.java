@@ -56,7 +56,6 @@ public class AlquilerItemsBean extends BasePageBean {
 	
 	public List<ItemRentado> getAlquilados() throws Exception{
 		try {
-			setDocumento(document);
 			return serviciosalquiler.consultarCliente(document).getRentados();
 		}catch(ExcepcionServiciosAlquiler ex) {
 			throw ex;	
@@ -80,8 +79,9 @@ public class AlquilerItemsBean extends BasePageBean {
 		}
 	}
 	
-	public void rentarItem(int iditem,int numdias)throws Exception {
+	public void rentarItem(int iditem,int numdias,long documento)throws Exception {
 		try {
+			System.out.println(iditem);
 			System.out.println(documento);
 			serviciosalquiler.registrarAlquilerCliente(java.sql.Date.valueOf(LocalDate.now()), documento,serviciosalquiler.consultarItem(iditem), numdias);
 			//return "registrocliente";
