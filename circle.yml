@@ -6,4 +6,4 @@ deployment:
   staging: 
     branch: master
     heroku: 
-      appname: lab07
+      appname: laboratorio07
