@@ -11,14 +11,14 @@
 <h:body>
 <h:form id="cliente_form">
 	<h1>Registro cliente</h1>
-	<br><p:inputText id="nombre" value="#{alquilerItemsBean.nombre}"> Nombre</p:inputText></br>
-	<br><p:inputText id="documento" value="#{alquilerItemsBean.documento}"> Documento</p:inputText></br>
-	<br><p:inputText id="telefono" value="#{alquilerItemsBean.telefono}"> Telefono</p:inputText></br>
-	<br><p:inputText id="direccion" value="#{alquilerItemsBean.direccion}"> Direccion</p:inputText></br>
-	<br><p:inputText id="email" value="#{alquilerItemsBean.email}"> Email</p:inputText></br>
-	<p:commandButton value="Agregar" actionListener="#{alquilerItemsBean.agregarCliente(alquilerItemsBean.nombre,alquilerItemsBean.documento,alquilerItemsBean.telefono,alquilerItemsBean.direccion,alquilerItemsBean.email)}" update='cliente_form' />
+	<br><p:inputText id="nombre" value="#{clienteBean.nombre}"> Nombre</p:inputText></br>
+	<br><p:inputText id="documento" value="#{clienteBean.documento}"> Documento</p:inputText></br>
+	<br><p:inputText id="telefono" value="#{clienteBean.telefono}"> Telefono</p:inputText></br>
+	<br><p:inputText id="direccion" value="#{clienteBean.direccion}"> Direccion</p:inputText></br>
+	<br><p:inputText id="email" value="#{clienteBean.email}"> Email</p:inputText></br>
+	<p:commandButton value="Agregar" actionListener="#{clienteBean.agregarCliente(clienteBean.nombre,clienteBean.documento,clienteBean.telefono,clienteBean.direccion,clienteBean.email)}" update='cliente_form' />
 	
-	<p:dataTable id="cliente_table" var="cliente" value="#{alquilerItemsBean.clientes}">
+	<p:dataTable id="cliente_table" var="cliente" value="#{clienteBean.clientes}">
 		<p:column headerText="Documento">
 			<h:outputText value="#{cliente.documento}" />
 		</p:column>
@@ -36,7 +36,7 @@
 		</p:column>
 		
 		<p:column headerText="Cliente">
-			<p:button outcome="registroalquiler?document=#{cliente.documento}" value="View Cliente" />
+			<p:button outcome="registroalquiler?document=#{cliente.documento}" value="Cliente view" />
 		</p:column>		
         
 	</p:dataTable>

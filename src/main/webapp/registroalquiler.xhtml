@@ -5,24 +5,22 @@
 	xmlns:f="http://java.sun.com/jsf/core"
   xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
-
-
 <h:head>
 	<title></title>
 </h:head>
 <h:body>
-    <h1>registro de #{alquilerItemsBean.document}</h1>
+    <h1>registro de #{rentadosBean.document}</h1>
     <h:form id="registroalquiler_form">
-    <br><p:inputText id="iditem" value="#{alquilerItemsBean.iditem}" > id del item</p:inputText></br>
-	<br><p:inputText id="numdias" value="#{alquilerItemsBean.numdias}"> numero de dias de alquiler</p:inputText></br>
-    <br><p:outputLabel id='costoalquiler' value="#{alquilerItemsBean.costo}"> Costo del alquiler</p:outputLabel></br>
-    <p:commandButton value="valor del alquiler" actionListener="#{alquilerItemsBean.costoAlquiler(alquilerItemsBean.iditem, alquilerItemsBean.numdias)}" update='costoalquiler'/>
-    <p:button outcome = "registrocliente" value="alquilar item" actionlistener="#{alquilerItemsBean.rentarItem(alquilerItemsBean.iditem, alquilerItemsBean.numdias,alquilerItemsBean.document)}"/>
+    <br><p:inputText id="iditem" value="#{rentadosBean.iditem}" > id del item</p:inputText></br>
+	<br><p:inputText id="numdias" value="#{rentadosBean.numdias}"> numero de dias de alquiler</p:inputText></br>
+    <br><p:outputLabel id='costoalquiler' value="#{rentadosBean.costo}"> Costo del alquiler</p:outputLabel></br>
+    <p:commandButton value="valor del alquiler" actionListener="#{rentadosBean.costoAlquiler(rentadosBean.iditem, rentadosBean.numdias)}" update='costoalquiler'/>
+    <p:inputText id="doc" binding="#{docu}" value="#{rentadosBean.document}" style="display:none"/> 
+    <p:commandButton action = "registrocliente" value="alquilar item" actionListener="#{rentadosBean.rentarItem(rentadosBean.iditem, rentadosBean.numdias,docu.value)}"/>
      
 </h:form>
 <h:form>
-	<p:dataTable id="itemrentados_table" var="itemrentado" value="#{alquilerItemsBean.alquilados}">
+	<p:dataTable id="itemrentados_table" var="itemrentado" value="#{rentadosBean.alquilados}">
 		<p:column headerText="Id">
 			<h:outputText value="#{itemrentado.id}" />
 		</p:column>
@@ -30,10 +28,10 @@
 			<h:outputText value="#{itemrentado.fechafinrenta}" />
 		</p:column>
          <p:column headerText="fecha devolucion">
-			<h:outputText value="#{alquilerItemsBean.fechaActual()}" />
+			<h:outputText value="#{rentadosBean.fechaActual()}" />
 		</p:column>
 		<p:column headerText="multa">
-  			<h:outputText value="#{alquilerItemsBean.multa(itemrentado.id)}" />
+  			<h:outputText value="#{rentadosBean.multa(itemrentado.id)}" />
 		</p:column>
 		
 </p:dataTable>
